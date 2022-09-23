@@ -1,4 +1,4 @@
-import numpy as np # type: ignore
+import numpy as np  # type: ignore
 
 
 class Orbit:
@@ -66,4 +66,36 @@ class Orbit:
         dv_2 = np.sqrt(self.mu / orbit.r) * (
             1 - np.sqrt((2 * self.r) / (self.r + orbit.r))
         )  # From transfer orbit to destination orbit
+        self.r = orbit.r
         self.dv = self.dv + dv_1 + dv_2
+
+    def get_period(self) -> float:
+        """Returns the period of the orbit
+
+        Returns:
+            float: time in seconds
+        """
+
+        return 2 * np.pi * np.sqrt(self.r**3 / self.mu)  # s
+
+    def get_day_time(self) -> float:
+        """Return the total time in orbit the sun is visible
+
+        Returns:
+            float: time in seconds
+        """
+
+        arc = 2 * self.r * np.arcsin(self.r_E / (2 * self.r))
+        circum = 2 * np.pi * self.r
+        day_time_factor = (circum - arc) / circum
+
+        return self.get_period() * day_time_factor
+
+    def get_night_time(self) -> float:
+        """Return the total time in orbit the sun is not visible
+
+        Returns:
+            float: time in seconds
+        """
+
+        return self.get_period() - self.get_day_time()

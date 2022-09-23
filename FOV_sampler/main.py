@@ -1,4 +1,4 @@
-import numpy as np # type: ignore
+import numpy as np  # type: ignore
 import pandas as pd
 from random import random as rd
 import time
@@ -131,7 +131,6 @@ def main() -> None:
     # Add len(Y) to Z, set Y = []
 
     # Find average in Y
-
 
     # Write program to calculate best orbit, dv to retire, time in sun
 
