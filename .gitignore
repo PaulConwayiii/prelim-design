@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Custom entries
+*.csv
+*.xltx
+*.ods
+*.dat
